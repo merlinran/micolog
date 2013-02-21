@@ -1,4 +1,4 @@
-application: mlog
+application: chongqing-open-party
 version: 1
 runtime: python
 api_version: 1
