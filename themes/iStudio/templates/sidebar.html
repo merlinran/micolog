@@ -1,0 +1,118 @@
+<div id ="aside" class = "sidebar"> 
+
+  <div>
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=10&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2877610924&verifier=7a70162c&dpc=1"></iframe>
+  </div>
+
+  {% if blog.blognotice %}
+	<ul>
+		<li>
+			<h3>公告</h3>
+				<ul>
+				<li>
+				{{blog.blognotice|escape}}
+				</li>
+				</ul>
+		</li>
+	</ul>
+  {% endif %}
+
+	<ul>
+		<li>
+			<h3>文章分类</h3>
+			{% if categories %}
+				<ul>
+				{%for cate in categories%}
+				<li><a href="/category/{{cate.slug}}"title = "{{cate.count}} of {{cate.name}}">{{cate.name}}({{cate.count}})</a></li>
+				{%endfor%}
+				</ul>
+			{% endif %}
+		</li>
+	</ul>
+
+
+	<ul>
+		<li>
+			<h3>存档</h3>
+				{% if archives %}
+				<ul>
+					{%for archive in archives%}
+					<li><a href="/{{archive.year}}/{{archive.month}}" title = "{{archive.year}} Y,{{archive.month}}M">{{archive.year}}年{{archive.month}}月({{archive.entrycount}})</a>
+					</li>
+					{%endfor%}
+				</ul>
+				{% endif %}
+		</li>
+	</ul>
+
+			{% if alltags %}
+	<ul>
+		<li class="widget widget_tag_cloud">
+		<h3>标签云</h3>
+		<div class = "dline">
+			{% for t in alltags %}
+				<a style="font-size:{{ t.tagcount|add:9 }}px;" title="{{ t.tagcount }} pages of {{t.tag}}" 
+						href="/tag/{{t.tag|urlencode}}">{{t.tag}}</a>
+			{%endfor%}
+		</li>
+	</ul>
+			{% endif %}
+
+	<!-- color tag -->
+	<script type="text/javascript">
+        $(".widget_tag_cloud div a").each(function (i) {
+            this.style.color = randomColor()
+        });
+        function randomColor() {
+            var arrHex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+            var strHex = "#";
+            var index;
+            for (var i = 0; i < 6; i++) {
+                index = Math.round(Math.random() * 15);
+                strHex += arrHex[index];
+            }
+            return strHex;
+        }
+    
+	</script>
+
+
+	<ul>
+		<li id="recentcomments">
+			<h3>最新评论</h3>
+			<ul>
+				{% for comment in recent_comments %}
+				<li>
+				<a href="/{{comment.entry.link}}#comment-{{comment.key.id}}" title="发表于：{{comment.entry.title|escape}}">{{comment.author}}</a>&nbsp;说：{{comment.shortcontent}}...
+				</li>
+				{%endfor%}
+			</ul>
+
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<h3>快捷链接</h3>
+			<ul>
+				<li>
+				<a href="{{ blog.feedurl }}" title="Please use RSS 2.0 to synch this content">RSS <abbr title="Really Simple Syndication">订阅</abbr></a>
+				</li>
+				<li>
+					<a rel="nofollow" href="/sitemap">Sitemap</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<h3>友情链接</h3>
+			<ul>
+			{%for link in blogroll%}
+				<li>
+					<a href="{{link.href}}" target="_blank" title ="{{link.linkcomment}}">{{link.linktext}}</a>
+				</li>
+            {%endfor%}
+			</ul>
+		</li>
+	</ul>
+</div>
