@@ -1880,10 +1880,6 @@ body.search
 		color:#fff;
 	}
 /* RandomShow */
-#RandomShow
-	{
-		margin:0 0 15px;
-	}
 #RandomShow img
 	{
 		background:transparent url(images/loading.gif) no-repeat center;
